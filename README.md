@@ -103,11 +103,11 @@ will be disassembled into a sub-directory named `HR_Admin` as such:
 - Each nested element (`<recordTypeVisibilities>`, `<applicationVisibilities>`, `pageAccesses`, etc.) will be disassembled into further sub-directories by the nested element name. If a unique & required ID element (`application` is the unique ID element for `<applicationVisibilities>`) is found, the disassembled file will be named using it. Otherwise, the disassembled files for nested elements will be named using the SHA-256 of the element contents.
 - Each leaf element (`<description>`, `<label>`, `<userLicense>`) will be disassembled into the same file in the first sub-directory, which will have the same file-name as the original file.
 
-<img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/transformed.png">
+<img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/disassembled.png">
 
 <br>
 
-<img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/transformed-hashes.png">
+<img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/disassembled-hashes.png">
 
 <br>
 

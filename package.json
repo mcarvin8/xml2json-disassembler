@@ -62,5 +62,14 @@
   },
   "bugs": {
     "url": "https://github.com/mcarvin8/xml2json-disassembler/issues"
-  }
+  },
+  "keywords": [
+    "xml",
+    "json",
+    "transform",
+    "transformers",
+    "disassemble",
+    "disassembly",
+    "xml2json"
+  ]
 }
