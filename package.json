@@ -1,8 +1,8 @@
 {
-  "name": "@allanoricil/js-template",
-  "version": "1.3.0",
-  "description": "js template",
-  "author": "allanoricil <allanoricilcos@outlook.com>",
+  "name": "xml2json-disassembler",
+  "version": "0.0.1",
+  "description": "A JavaScript package to disassemble then transform XML files into smaller JSON files.",
+  "author": "Matt Carvin",
   "license": "ISC",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -36,7 +36,9 @@
     "@semantic-release/github": "^9.2.6",
     "@semantic-release/npm": "^11.0.2",
     "@semantic-release/release-notes-generator": "^12.1.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.19",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^8.0.3",
@@ -49,6 +51,16 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "fast-xml-parser": "^4.3.4",
+    "log4js": "^6.9.1",
+    "tslib": "^2.6.2",
+    "xml-disassembler": "^1.2.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcarvin8/xml2json-disassembler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcarvin8/xml2json-disassembler/issues"
   }
 }
