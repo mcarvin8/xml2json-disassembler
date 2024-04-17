@@ -1,5 +1,7 @@
 "use strict";
 
+export const INDENT = "    ";
+
 export const XML_PARSER_OPTION = {
   commentPropName: "!---",
   ignoreAttributes: false,
@@ -10,6 +12,14 @@ export const XML_PARSER_OPTION = {
   trimValues: true,
   processEntities: false,
   cdataPropName: "![CDATA[",
+};
+
+export const JSON_PARSER_OPTION = {
+  ...XML_PARSER_OPTION,
+  format: true,
+  indentBy: INDENT,
+  suppressBooleanAttributes: false,
+  suppressEmptyNode: false,
 };
 
 export interface XmlElement {

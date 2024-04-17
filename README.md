@@ -6,7 +6,7 @@ A JavaScript package to disassemble then transform XML files into smaller JSON f
 
 Large XML files can be a pain to mantain in version control. These files can contain thousands of lines and it becomes very difficult to track changes made to these files in a standard version control server like GitHub.
 
-This package offers a way to break down large XML files into smaller JSON files which can be used to review changes in a format easier to digest.
+This package offers a way to break down large XML files into smaller JSON files which can be used to review changes in a format easier to digest. When needed, the inverse class will reassemble the original XML file from the smaller JSON files.
 
 This will parse and retain the following XML elements:
 
@@ -23,6 +23,8 @@ npm install xml2json-disassembler
 ```
 
 ## Usage
+
+### XML 2 JSON
 
 ```typescript
 /* 
@@ -46,6 +48,8 @@ await handler.transform({
   postPurge: true,
 });
 ```
+
+Disassemble then transform 1 or multiple XML files into JSON files. If the `xmlPath` is a directory, only the XMLs in the immediate directory will be processed. Each XML wiill be transformed into JSON files in new sub-directories using the XML's base name (everything before the first period in the file-name).
 
 Example:
 
@@ -111,6 +115,28 @@ will be disassembled into a sub-directory named `HR_Admin` as such:
 
 <br>
 
+### JSON 2 XML
+
+```typescript
+/* 
+FLAGS
+- jsonPath: Path to the directory containing the JSON files to reassemble into 1 XML file (must be a directory).
+- fileExtension: (Optional) Desired file extension for the final XML (default: `.xml`).
+- postPurge: (Optional) Boolean value. If set to true, purge the disassembled directory containing JSON files after the XML is reassembled.
+                               Defaults to false.
+*/
+import { JsonToXmlReassembler } from "xml2json-disassembler";
+
+const handler = new JsonToXmlReassembler();
+await handler.reassemble({
+  jsonPath: "test/baselines/HR_Admin",
+  fileExtension: "permissionset-meta.xml",
+  postPurge: true,
+});
+```
+
+Reassemble all of the JSON files in a directory into 1 XML file. **Note:** You should only be reassembling JSON files created by the `XmlToJsonDisassembler` class for intended results. The reassembled XML file will be created in the parent directory of `jsonPath` and will overwrite the original file used to create the original disassembled directories, if it still exists and the `fileExtension` flag matches the original file extension.
+
 ## Logging
 
 By default, the package will not print any debugging statements to the console. Any error or debugging statements will be added to a log file, `disassemble.log`, created in the same directory you are running this package in. This file will be created when running the package in all cases, even if there are no errors. I recommend adding `disassemble.log` to your `.gitignore` file.
@@ -143,12 +169,19 @@ import { XmlToJsonDisassembler, setLogLevel } from "xml2json-disassembler";
 
 setLogLevel("debug");
 
-const handler = new XmlToJsonDisassembler();
-await handler.transform({
+const disassembleHandler = new XmlToJsonDisassembler();
+await disassembleHandler.transform({
   xmlPath: "test/baselines/general",
   uniqueIdElements:
     "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
   prePurge: true,
+  postPurge: true,
+});
+
+const reassembleHandler = new JsonToXmlReassembler();
+await reassembleHandler.reassemble({
+  jsonPath: "test/baselines/HR_Admin",
+  fileExtension: "permissionset-meta.xml",
   postPurge: true,
 });
 ```
