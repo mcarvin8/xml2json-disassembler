@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.2...v1.0.3) (2024-04-24)
+
+### Bug Fixes
+
+- upgrade xml disassembler to fix multi-line leaf sorting, rename XmlToJsonDisassembler function to disassemble ([e309cfa](https://github.com/mcarvin8/xml2json-disassembler/commit/e309cfa4902a03f68200e238b1aada6bcb426194))
+
 ## [1.0.2](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.1...v1.0.2) (2024-04-17)
 
 ### Bug Fixes
