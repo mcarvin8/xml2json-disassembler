@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.3...v1.0.4) (2024-04-24)
+
+### Bug Fixes
+
+- upgrade xml-disassembler, normalize `jsonPath`/`xmlPath` variables to `filePath` ([18a37b9](https://github.com/mcarvin8/xml2json-disassembler/commit/18a37b93a94cbc7126777efd21dbc59d96d6bf0b))
+
 ## [1.0.3](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.2...v1.0.3) (2024-04-24)
 
 ### Bug Fixes
