@@ -8,7 +8,7 @@ import { disassembleHandler } from "@src/service/disassembleHandler";
 import { transform2JSON } from "@src/service/transform2JSON";
 
 export class XmlToJsonDisassembler {
-  async transform(xmlAttributes: {
+  async disassemble(xmlAttributes: {
     xmlPath: string;
     uniqueIdElements?: string;
     prePurge?: boolean;

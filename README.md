@@ -40,7 +40,7 @@ FLAGS
 import { XmlToJsonDisassembler } from "xml2json-disassembler";
 
 const handler = new XmlToJsonDisassembler();
-await handler.transform({
+await handler.disassemble({
   xmlPath: "test/baselines/general",
   uniqueIdElements:
     "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
@@ -165,12 +165,16 @@ When the log level is set to `debug`, the log file will contain statements like 
 ```
 
 ```typescript
-import { XmlToJsonDisassembler, setLogLevel } from "xml2json-disassembler";
+import {
+  XmlToJsonDisassembler,
+  JsonToXmlReassembler,
+  setLogLevel,
+} from "xml2json-disassembler";
 
 setLogLevel("debug");
 
 const disassembleHandler = new XmlToJsonDisassembler();
-await disassembleHandler.transform({
+await disassembleHandler.disassemble({
   xmlPath: "test/baselines/general",
   uniqueIdElements:
     "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
