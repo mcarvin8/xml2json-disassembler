@@ -9,38 +9,38 @@ import { transform2JSON } from "@src/service/transform2JSON";
 
 export class XmlToJsonDisassembler {
   async disassemble(xmlAttributes: {
-    xmlPath: string;
+    filePath: string;
     uniqueIdElements?: string;
     prePurge?: boolean;
     postPurge?: boolean;
   }): Promise<void> {
     const {
-      xmlPath,
+      filePath,
       uniqueIdElements = "",
       prePurge = false,
       postPurge = false,
     } = xmlAttributes;
-    const fileStat = await stat(xmlPath);
+    const fileStat = await stat(filePath);
 
     if (fileStat.isFile()) {
-      const filePath = resolve(xmlPath);
-      if (!filePath.endsWith(".xml")) {
-        logger.error(`The file path ${filePath} is not an XML file.`);
+      const resolvedPath = resolve(filePath);
+      if (!resolvedPath.endsWith(".xml")) {
+        logger.error(`The file path  is not an XML file: ${resolvedPath}`);
         return;
       }
       await this.processFile({
-        filePath,
+        filePath: resolvedPath,
         uniqueIdElements,
         prePurge,
         postPurge,
       });
     } else if (fileStat.isDirectory()) {
-      const files = await readdir(xmlPath);
-      for (const file of files) {
-        const filePath = join(xmlPath, file);
-        if (filePath.endsWith(".xml")) {
+      const subFiles = await readdir(filePath);
+      for (const subFile of subFiles) {
+        const subFilePath = join(filePath, subFile);
+        if (subFilePath.endsWith(".xml")) {
           await this.processFile({
-            filePath,
+            filePath: subFilePath,
             uniqueIdElements,
             prePurge,
             postPurge,

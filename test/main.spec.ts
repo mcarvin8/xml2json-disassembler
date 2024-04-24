@@ -37,7 +37,7 @@ describe("main function", () => {
 
   it("should disassemble & transform 1 XML file into JSON files.", async () => {
     await xml2jsonDisassemblerHandler.disassemble({
-      xmlPath: "mock/HR_Admin.permissionset-meta.xml",
+      filePath: "mock/HR_Admin.permissionset-meta.xml",
       uniqueIdElements:
         "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
     });
@@ -46,7 +46,7 @@ describe("main function", () => {
   });
   it("should disassemble & transform a directory of XML files into JSON files.", async () => {
     await xml2jsonDisassemblerHandler.disassemble({
-      xmlPath: "mock",
+      filePath: "mock",
       uniqueIdElements:
         "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
       prePurge: true,
@@ -57,7 +57,7 @@ describe("main function", () => {
   });
   it("should reassemble the XML file.", async () => {
     await json2xmlReassemblerHandler.reassemble({
-      jsonPath: "mock/HR_Admin",
+      filePath: "mock/HR_Admin",
       fileExtension: "permissionset-meta.xml",
     });
 
@@ -65,7 +65,7 @@ describe("main function", () => {
   });
   it("should reassemble the XML file with comments.", async () => {
     await json2xmlReassemblerHandler.reassemble({
-      jsonPath: "mock/Numbers-fr",
+      filePath: "mock/Numbers-fr",
       fileExtension: "globalValueSetTranslation-meta.xml",
     });
 
@@ -73,7 +73,7 @@ describe("main function", () => {
   });
   it("should reassemble the CDATA XML file.", async () => {
     await json2xmlReassemblerHandler.reassemble({
-      jsonPath: "mock/VidLand_US",
+      filePath: "mock/VidLand_US",
       fileExtension: "marketingappextension-meta.xml",
     });
 
@@ -81,7 +81,7 @@ describe("main function", () => {
   });
   it("should reassemble the XML file with an array of leafs.", async () => {
     await json2xmlReassemblerHandler.reassemble({
-      jsonPath: "mock/Dreamhouse",
+      filePath: "mock/Dreamhouse",
       fileExtension: "app-meta.xml",
     });
 
@@ -89,7 +89,7 @@ describe("main function", () => {
   });
   it("should reassemble the XML file with attributes.", async () => {
     await json2xmlReassemblerHandler.reassemble({
-      jsonPath: "mock/attributes",
+      filePath: "mock/attributes",
     });
 
     expect(logger.error).not.toHaveBeenCalled();
@@ -100,14 +100,14 @@ describe("main function", () => {
     const fakeFileContents = "Testing error condition.";
     await writeFile(fakeFile, fakeFileContents);
     await xml2jsonDisassemblerHandler.disassemble({
-      xmlPath: fakeFile,
+      filePath: fakeFile,
     });
     expect(logger.error).toHaveBeenCalled();
   });
   it("should test reassemble error condition (file path provided).", async () => {
     const fakeFile = "mock/not-an-xml.txt";
     await json2xmlReassemblerHandler.reassemble({
-      jsonPath: fakeFile,
+      filePath: fakeFile,
     });
     await rm(fakeFile);
     expect(logger.error).toHaveBeenCalled();
