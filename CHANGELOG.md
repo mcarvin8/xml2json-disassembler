@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.0...v1.1.1) (2024-05-22)
+
+### Bug Fixes
+
+- pass ignore path to xml disassembler ([9142333](https://github.com/mcarvin8/xml2json-disassembler/commit/9142333b3261b23cf3130843b98884270d275243))
+
 # [1.1.0](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.4...v1.1.0) (2024-05-22)
 
 ### Features
