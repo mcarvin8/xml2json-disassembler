@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.4...v1.1.0) (2024-05-22)
+
+### Features
+
+- allow an ignore file when running disassembly ([e8b7ee8](https://github.com/mcarvin8/xml2json-disassembler/commit/e8b7ee8dea6ff71730823a8b30bc8fea5fefe2b6))
+
 ## [1.0.4](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.0.3...v1.0.4) (2024-04-24)
 
 ### Bug Fixes
