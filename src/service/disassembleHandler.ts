@@ -7,6 +7,7 @@ export async function disassembleHandler(
   uniqueIdElements: string,
   prePurge: boolean,
   postPurge: boolean,
+  ignorePath: string,
 ): Promise<void> {
   const handler = new DisassembleXMLFileHandler();
   await handler.disassemble({
@@ -14,5 +15,6 @@ export async function disassembleHandler(
     uniqueIdElements,
     prePurge,
     postPurge,
+    ignorePath,
   });
 }

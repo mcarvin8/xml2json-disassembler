@@ -49,6 +49,7 @@ export class XmlToJsonDisassembler {
         uniqueIdElements,
         prePurge,
         postPurge,
+        ignorePath,
       });
     } else if (fileStat.isDirectory()) {
       const subFiles = await readdir(filePath);
@@ -64,6 +65,7 @@ export class XmlToJsonDisassembler {
             uniqueIdElements,
             prePurge,
             postPurge,
+            ignorePath,
           });
         } else if (this.ign.ignores(relativeSubFilePath)) {
           logger.warn(`File ignored by ${ignorePath}: ${subFilePath}`);
@@ -77,10 +79,18 @@ export class XmlToJsonDisassembler {
     uniqueIdElements: string;
     prePurge: boolean;
     postPurge: boolean;
+    ignorePath: string;
   }): Promise<void> {
-    const { filePath, uniqueIdElements, prePurge, postPurge } = xmlAttributes;
+    const { filePath, uniqueIdElements, prePurge, postPurge, ignorePath } =
+      xmlAttributes;
 
-    await disassembleHandler(filePath, uniqueIdElements, prePurge, postPurge);
+    await disassembleHandler(
+      filePath,
+      uniqueIdElements,
+      prePurge,
+      postPurge,
+      ignorePath,
+    );
     const fullName = basename(filePath, extname(filePath));
     const basePath = dirname(filePath);
     const baseName = fullName.split(".")[0];
