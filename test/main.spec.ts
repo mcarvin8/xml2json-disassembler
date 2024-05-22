@@ -25,6 +25,7 @@ describe("main function", () => {
 
   beforeEach(async () => {
     jest.spyOn(logger, "error");
+    jest.spyOn(logger, "warn");
   });
 
   afterEach(async () => {
@@ -54,6 +55,13 @@ describe("main function", () => {
     });
 
     expect(logger.error).not.toHaveBeenCalled();
+  });
+  it("should test ignore file.", async () => {
+    await xml2jsonDisassemblerHandler.disassemble({
+      filePath: "mock/ignore.xml",
+    });
+
+    expect(logger.warn).toHaveBeenCalled();
   });
   it("should reassemble the XML file.", async () => {
     await json2xmlReassemblerHandler.reassemble({

@@ -8,6 +8,9 @@ dependencies:
   fast-xml-parser:
     specifier: ^4.3.4
     version: 4.3.4
+  ignore:
+    specifier: ^5.3.1
+    version: 5.3.1
   log4js:
     specifier: ^6.9.1
     version: 6.9.1
@@ -15,8 +18,8 @@ dependencies:
     specifier: ^2.6.2
     version: 2.6.2
   xml-disassembler:
-    specifier: ^1.2.10
-    version: 1.2.10
+    specifier: ^1.3.1
+    version: 1.3.1
 
 devDependencies:
   "@rollup/plugin-terser":
@@ -585,7 +588,7 @@ packages:
       debug: 4.3.4
       espree: 9.6.1
       globals: 13.24.0
-      ignore: 5.3.0
+      ignore: 5.3.1
       import-fresh: 3.3.0
       js-yaml: 4.1.0
       minimatch: 3.1.2
@@ -3154,7 +3157,7 @@ packages:
       glob-parent: 6.0.2
       globals: 13.24.0
       graphemer: 1.4.0
-      ignore: 5.3.0
+      ignore: 5.3.1
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
@@ -3681,7 +3684,7 @@ packages:
       array-union: 2.1.0
       dir-glob: 3.0.1
       fast-glob: 3.3.2
-      ignore: 5.3.0
+      ignore: 5.3.1
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
@@ -3695,7 +3698,7 @@ packages:
     dependencies:
       "@sindresorhus/merge-streams": 1.0.0
       fast-glob: 3.3.2
-      ignore: 5.3.0
+      ignore: 5.3.1
       path-type: 5.0.0
       slash: 5.1.0
       unicorn-magic: 0.1.0
@@ -3891,13 +3894,12 @@ packages:
     hasBin: true
     dev: true
 
-  /ignore@5.3.0:
+  /ignore@5.3.1:
     resolution:
       {
-        integrity: sha512-g7dmpshy+gD7mh88OC9NwSGTKoc3kyLAZQRU1mt53Aw/vnvfXnbC+F/7F7QoYVKbV+KNvJx8wArewKy1vXMtlg==,
+        integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==,
       }
     engines: { node: ">= 4" }
-    dev: true
 
   /import-fresh@3.3.0:
     resolution:
@@ -7500,14 +7502,15 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
-  /xml-disassembler@1.2.10:
+  /xml-disassembler@1.3.1:
     resolution:
       {
-        integrity: sha512-mcHh0CQRxjMC9NIZVZ/YCyREC2vX3HQWa5SS4/QlfWtl8rHZSAXWb38a4cvOJG44q55VvJkuhW8EOKh123xNgw==,
+        integrity: sha512-EyntSrKoeODyjlnzYEtO/+nB9XOHmPHno+1mXN7CptgDIYZ+vcUF0V4iSighdonXjG/lFhwTYVw24UDGxhwEKA==,
       }
     engines: { node: ">=18", pnpm: ">=8" }
     dependencies:
       fast-xml-parser: 4.3.4
+      ignore: 5.3.1
       log4js: 6.9.1
       tslib: 2.6.2
     transitivePeerDependencies:

@@ -1,31 +1,47 @@
 "use strict";
 
-import { stat, readdir } from "node:fs/promises";
-import { resolve, join, basename, dirname, extname } from "node:path";
+import { existsSync } from "node:fs";
+import { stat, readdir, readFile } from "node:fs/promises";
+import { resolve, join, basename, dirname, extname, relative } from "node:path";
+import ignore, { Ignore } from "ignore";
 
 import { logger } from "@src/index";
 import { disassembleHandler } from "@src/service/disassembleHandler";
 import { transform2JSON } from "@src/service/transform2JSON";
 
 export class XmlToJsonDisassembler {
+  private ign: Ignore = ignore();
+
   async disassemble(xmlAttributes: {
     filePath: string;
     uniqueIdElements?: string;
     prePurge?: boolean;
     postPurge?: boolean;
+    ignorePath?: string;
   }): Promise<void> {
     const {
       filePath,
       uniqueIdElements = "",
       prePurge = false,
       postPurge = false,
+      ignorePath = ".xmldisassemblerignore",
     } = xmlAttributes;
+    const resolvedIgnorePath = resolve(ignorePath);
+    if (existsSync(resolvedIgnorePath)) {
+      const content = await readFile(resolvedIgnorePath);
+      this.ign.add(content.toString());
+    }
+
     const fileStat = await stat(filePath);
 
     if (fileStat.isFile()) {
       const resolvedPath = resolve(filePath);
       if (!resolvedPath.endsWith(".xml")) {
         logger.error(`The file path  is not an XML file: ${resolvedPath}`);
+        return;
+      }
+      if (this.ign.ignores(filePath)) {
+        logger.warn(`File ignored by ${ignorePath}: ${resolvedPath}`);
         return;
       }
       await this.processFile({
@@ -38,13 +54,19 @@ export class XmlToJsonDisassembler {
       const subFiles = await readdir(filePath);
       for (const subFile of subFiles) {
         const subFilePath = join(filePath, subFile);
-        if (subFilePath.endsWith(".xml")) {
+        const relativeSubFilePath = relative(process.cwd(), subFilePath);
+        if (
+          subFilePath.endsWith(".xml") &&
+          !this.ign.ignores(relativeSubFilePath)
+        ) {
           await this.processFile({
             filePath: subFilePath,
             uniqueIdElements,
             prePurge,
             postPurge,
           });
+        } else if (this.ign.ignores(relativeSubFilePath)) {
+          logger.warn(`File ignored by ${ignorePath}: ${subFilePath}`);
         }
       }
     }

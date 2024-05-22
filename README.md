@@ -36,6 +36,7 @@ FLAGS
                                Defaults to false.
 - postPurge: (Optional) Boolean value. If set to true, purge the original XML file after transforming it into smaller JSON files.
                                Defaults to false.
+- ignorePath: (Optional) Path to an ignore file containing XML files to ignore during disassembly. See "Ignore File" section.
 */
 import { XmlToJsonDisassembler } from "xml2json-disassembler";
 
@@ -46,6 +47,7 @@ await handler.disassemble({
     "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
   prePurge: true,
   postPurge: true,
+  ignorePath: ".xmldisassemblerignore",
 });
 ```
 
@@ -136,6 +138,14 @@ await handler.reassemble({
 ```
 
 Reassemble all of the JSON files in a directory into 1 XML file. **Note:** You should only be reassembling JSON files created by the `XmlToJsonDisassembler` class for intended results. The reassembled XML file will be created in the parent directory of `filePath` and will overwrite the original file used to create the original disassembled directories, if it still exists and the `fileExtension` flag matches the original file extension.
+
+## Ignore File
+
+If you wish, you can create an ignore file to have the disassembler ignore specific XMLs similar to a `.gitignore` file.
+
+The disassembler uses the [node-ignore](https://github.com/kaelzhang/node-ignore) package to parse ignore files that follow [.gitignore spec 2.22.1](https://git-scm.com/docs/gitignore).
+
+By default, the XML disassembler will look for an ignore file named `.xmldisassemblerignore` in the current working directory. Set the `ignorePath` flag to override this ignore path when running the XmlToJsonDisassembler class.
 
 ## Logging
 
