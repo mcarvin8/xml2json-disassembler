@@ -1,6 +1,6 @@
 import { readdir, readFile, writeFile, rm } from "node:fs/promises";
 import { strictEqual } from "node:assert";
-import { resolve, join } from "node:path";
+import { resolve, join } from "node:path/posix";
 import { copy } from "fs-extra";
 
 import {

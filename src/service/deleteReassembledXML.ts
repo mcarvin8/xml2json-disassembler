@@ -1,7 +1,7 @@
 "use strict";
 
 import { stat, readdir, rm } from "node:fs/promises";
-import { join } from "node:path";
+import { join } from "node:path/posix";
 
 export async function deleteReassembledXML(
   disassembledPath: string,
