@@ -1,3 +1,10 @@
+<!-- markdownlint-disable MD024 MD025 -->
+<!-- markdown-link-check-disable -->
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## [1.1.1](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.0...v1.1.1) (2024-05-22)
 
 ### Bug Fixes
