@@ -2,7 +2,14 @@
 
 import { existsSync } from "node:fs";
 import { stat, readdir, readFile } from "node:fs/promises";
-import { resolve, join, basename, dirname, extname, relative } from "node:path";
+import {
+  resolve,
+  join,
+  basename,
+  dirname,
+  extname,
+  relative,
+} from "node:path/posix";
 import ignore, { Ignore } from "ignore";
 
 import { logger } from "@src/index";
@@ -53,9 +60,12 @@ export class XmlToJsonDisassembler {
       });
     } else if (fileStat.isDirectory()) {
       const subFiles = await readdir(filePath);
+      const resolvedBasePath = dirname(resolvedIgnorePath); // Base path of the ignore file
       for (const subFile of subFiles) {
         const subFilePath = join(filePath, subFile);
-        const relativeSubFilePath = relative(process.cwd(), subFilePath);
+        const relativeSubFilePath = this.posixPath(
+          relative(resolvedBasePath, subFilePath),
+        );
         if (
           subFilePath.endsWith(".xml") &&
           !this.ign.ignores(relativeSubFilePath)
@@ -95,5 +105,9 @@ export class XmlToJsonDisassembler {
     const basePath = dirname(filePath);
     const baseName = fullName.split(".")[0];
     await transform2JSON(join(basePath, baseName));
+  }
+  private posixPath(path: string): string {
+    // Normalize path to POSIX-style (for cross-platform compatibility)
+    return path.replace(/\\+/g, "/");
   }
 }
