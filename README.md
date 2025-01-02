@@ -4,6 +4,8 @@
 
 A JavaScript package to disassemble then transform XML files into smaller JSON files. This is an extension of my [XML Disassembler](https://github.com/mcarvin8/xml-disassembler) package.
 
+## Background
+
 Large XML files can be a pain to mantain in version control. These files can contain thousands of lines and it becomes very difficult to track changes made to these files in a standard version control server like GitHub.
 
 This package offers a way to break down large XML files into smaller JSON files which can be used to review changes in a format easier to digest. When needed, the inverse class will reassemble the original XML file from the smaller JSON files.
