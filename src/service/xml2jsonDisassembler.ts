@@ -1,24 +1,14 @@
 "use strict";
 
 import { existsSync } from "node:fs";
-import { stat, readdir, readFile } from "node:fs/promises";
-import {
-  resolve,
-  join,
-  basename,
-  dirname,
-  extname,
-  relative,
-} from "node:path/posix";
-import ignore, { Ignore } from "ignore";
+import { stat, readdir } from "node:fs/promises";
+import { resolve, join, basename, dirname, extname } from "node:path/posix";
 
 import { logger } from "@src/index";
 import { disassembleHandler } from "@src/service/disassembleHandler";
 import { transform2JSON } from "@src/service/transform2JSON";
 
 export class XmlToJsonDisassembler {
-  private ign: Ignore = ignore();
-
   async disassemble(xmlAttributes: {
     filePath: string;
     uniqueIdElements?: string;
@@ -33,22 +23,12 @@ export class XmlToJsonDisassembler {
       postPurge = false,
       ignorePath = ".xmldisassemblerignore",
     } = xmlAttributes;
-    const resolvedIgnorePath = resolve(ignorePath);
-    if (existsSync(resolvedIgnorePath)) {
-      const content = await readFile(resolvedIgnorePath);
-      this.ign.add(content.toString());
-    }
-
     const fileStat = await stat(filePath);
 
     if (fileStat.isFile()) {
       const resolvedPath = resolve(filePath);
       if (!resolvedPath.endsWith(".xml")) {
         logger.error(`The file path  is not an XML file: ${resolvedPath}`);
-        return;
-      }
-      if (this.ign.ignores(filePath)) {
-        logger.warn(`File ignored by ${ignorePath}: ${resolvedPath}`);
         return;
       }
       await this.processFile({
@@ -60,16 +40,9 @@ export class XmlToJsonDisassembler {
       });
     } else if (fileStat.isDirectory()) {
       const subFiles = await readdir(filePath);
-      const resolvedBasePath = dirname(resolvedIgnorePath); // Base path of the ignore file
       for (const subFile of subFiles) {
         const subFilePath = join(filePath, subFile);
-        const relativeSubFilePath = this.posixPath(
-          relative(resolvedBasePath, subFilePath),
-        );
-        if (
-          subFilePath.endsWith(".xml") &&
-          !this.ign.ignores(relativeSubFilePath)
-        ) {
+        if (subFilePath.endsWith(".xml")) {
           await this.processFile({
             filePath: subFilePath,
             uniqueIdElements,
@@ -77,8 +50,6 @@ export class XmlToJsonDisassembler {
             postPurge,
             ignorePath,
           });
-        } else if (this.ign.ignores(relativeSubFilePath)) {
-          logger.warn(`File ignored by ${ignorePath}: ${subFilePath}`);
         }
       }
     }
@@ -104,10 +75,13 @@ export class XmlToJsonDisassembler {
     const fullName = basename(filePath, extname(filePath));
     const basePath = dirname(filePath);
     const baseName = fullName.split(".")[0];
-    await transform2JSON(join(basePath, baseName));
-  }
-  private posixPath(path: string): string {
-    // Normalize path to POSIX-style (for cross-platform compatibility)
-    return path.replace(/\\+/g, "/");
+    const disassemblePath = join(basePath, baseName);
+    if (existsSync(disassemblePath)) {
+      await transform2JSON(disassemblePath);
+    } else {
+      logger.warn(
+        `XML file ${filePath} was unable to disassembled into smaller files. Check the log file and your ignore file.`,
+      );
+    }
   }
 }
