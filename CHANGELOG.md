@@ -5,6 +5,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.4](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.3...v1.1.4) (2025-01-02)
+
+
+### Bug Fixes
+
+* remove ignore dependency from this plugin ([875be65](https://github.com/mcarvin8/xml2json-disassembler/commit/875be652dcde812fd677f92e6a4b8ae287c33752))
+
 ## [1.1.3](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.2...v1.1.3) (2024-12-15)
 
 
