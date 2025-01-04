@@ -1,11 +1,10 @@
 "use strict";
 
-import { readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { readdir, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path/posix";
-import { XMLParser } from "fast-xml-parser";
+import { parseXML } from "xml-disassembler";
 
 import { logger } from "@src/index";
-import { XML_PARSER_OPTION, XmlElement } from "@src/helpers/types";
 
 export async function transform2JSON(xmlPath: string): Promise<void> {
   const subFiles = await readdir(xmlPath);
@@ -24,13 +23,8 @@ export async function transform2JSON(xmlPath: string): Promise<void> {
 }
 
 async function writeJSON(xmlPath: string): Promise<void> {
-  const xmlParser = new XMLParser(XML_PARSER_OPTION);
-  const xmlContent = await readFile(xmlPath, "utf-8");
-  const xmlParsed = xmlParser.parse(xmlContent, true) as Record<
-    string,
-    XmlElement
-  >;
-  const jsonString = JSON.stringify(xmlParsed, null, 2);
+  const parsedXml = await parseXML(xmlPath);
+  const jsonString = JSON.stringify(parsedXml, null, 2);
   const jsonPath = xmlPath.replace(/\.xml$/, ".json");
   await writeFile(jsonPath, jsonString);
   logger.debug(`${xmlPath} has been transformed into ${jsonPath}`);
