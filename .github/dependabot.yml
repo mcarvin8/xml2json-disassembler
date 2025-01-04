@@ -18,4 +18,3 @@ updates:
       prefix-development: chore(dev-deps)
     allow:
       - dependency-name: 'xml-disassembler'
-      - dependency-name: 'fast-xml-parser'
