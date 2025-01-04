@@ -5,6 +5,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.6](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.5...v1.1.6) (2025-01-04)
+
+
+### Bug Fixes
+
+* import log4js from xml-disassembler ([1c953e3](https://github.com/mcarvin8/xml2json-disassembler/commit/1c953e331344cfbffeed4b7236f8a12edb03e16b))
+* remove fast-xml-parser from this package ([9796306](https://github.com/mcarvin8/xml2json-disassembler/commit/97963065a5286440d2298b9e66a10a8b90d9bc84))
+
 ## [1.1.5](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.4...v1.1.5) (2025-01-04)
 
 
