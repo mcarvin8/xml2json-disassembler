@@ -155,8 +155,6 @@ By default, the package will not print any debugging statements to the console. 
 
 This log will include the results of this package and the XML Disassembler package.
 
-**NOTE**: The logging package used, `log4js`, requires `fs-extra` to be installed in your project as a dependency (`npm install --save fs-extra`).
-
 The logger's default state is to only log errors to `disassemble.log`. Check this file for ERROR statements that will look like:
 
 ```
