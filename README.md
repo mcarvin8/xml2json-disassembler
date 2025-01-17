@@ -4,6 +4,20 @@
 
 A JavaScript package to disassemble then transform XML files into smaller JSON files. This is an extension of my [XML Disassembler](https://github.com/mcarvin8/xml-disassembler) package.
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+  - [XML2JSON](#xml2json)
+  - [JSON2XML](#json2xml)
+- [Ignore File](#ignore-file)
+- [Logging](#logging)
+- [Template](#template)
+</details>
+
 ## Background
 
 Large XML files can be a pain to mantain in version control. These files can contain thousands of lines and it becomes very difficult to track changes made to these files in a standard version control server like GitHub.
@@ -26,7 +40,7 @@ npm install xml2json-disassembler
 
 ## Usage
 
-### XML 2 JSON
+### XML2JSON
 
 ```typescript
 /* 
@@ -119,7 +133,7 @@ will be disassembled into a sub-directory named `HR_Admin` as such:
 
 <br>
 
-### JSON 2 XML
+### JSON2XML
 
 ```typescript
 /* 
