@@ -5,6 +5,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.11](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.10...v1.1.11) (2025-01-21)
+
+
+### Bug Fixes
+
+* remove parallel processing due to issues ([9b1d933](https://github.com/mcarvin8/xml2json-disassembler/commit/9b1d933459bb4cda572f96156cf6f50784a1e2ad))
+
 ## [1.1.10](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.9...v1.1.10) (2025-01-21)
 
 
