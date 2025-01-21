@@ -2,8 +2,10 @@
 
 import { readdir, rm } from "node:fs/promises";
 import { join } from "node:path/posix";
-import { getConcurrencyThreshold } from "./getConcurrencyThreshold";
-import { withConcurrencyLimit } from "./withConcurrencyLimit";
+import {
+  getConcurrencyThreshold,
+  withConcurrencyLimit,
+} from "xml-disassembler";
 
 export async function deleteReassembledXML(
   disassembledPath: string,

@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.6.2
     version: 2.8.1
   xml-disassembler:
-    specifier: ^1.3.9
-    version: 1.3.9
+    specifier: ^1.3.10
+    version: 1.3.10
 
 devDependencies:
   "@rollup/plugin-terser":
@@ -4660,10 +4660,10 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
-  /xml-disassembler@1.3.9:
+  /xml-disassembler@1.3.10:
     resolution:
       {
-        integrity: sha512-/y+VjjNffBLXlLN+2hUIqUCZmEv0rjrFrmRqec9/YSrZDZWlKt/45urH+E81ZFDx4iqao8RtM7LZ17df8MRRXA==,
+        integrity: sha512-NqL1FdKI5c7d7fkB69VDFOMlRspX7u5D7fEpNWgXn9F8PIlyInHWYisBqSsmTk3YUZaJdM54VCMI92d+rFEYvQ==,
       }
     engines: { node: ">=18", pnpm: ">=8" }
     dependencies:

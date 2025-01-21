@@ -2,13 +2,15 @@
 
 import { stat, readdir } from "node:fs/promises";
 import { join } from "node:path/posix";
+import {
+  getConcurrencyThreshold,
+  withConcurrencyLimit,
+} from "xml-disassembler";
 
 import { logger } from "@src/index";
 import { reassembleHandler } from "@src/service/reassembleHandler";
 import { transform2XML } from "@src/service/transform2XML";
 import { deleteReassembledXML } from "@src/service/deleteReassembledXML";
-import { withConcurrencyLimit } from "./withConcurrencyLimit";
-import { getConcurrencyThreshold } from "./getConcurrencyThreshold";
 
 export class JsonToXmlReassembler {
   async reassemble(xmlAttributes: {
