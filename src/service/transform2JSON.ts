@@ -1,25 +1,31 @@
 "use strict";
 
-import { readdir, rm, stat, writeFile } from "node:fs/promises";
+import { readdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path/posix";
 import { parseXML } from "xml-disassembler";
 
 import { logger } from "@src/index";
+import { withConcurrencyLimit } from "./withConcurrencyLimit";
+import { getConcurrencyThreshold } from "./getConcurrencyThreshold";
 
 export async function transform2JSON(xmlPath: string): Promise<void> {
-  const subFiles = await readdir(xmlPath);
-  for (const subFile of subFiles) {
-    const subFilePath = join(xmlPath, subFile);
-    if ((await stat(subFilePath)).isDirectory()) {
-      await transform2JSON(subFilePath);
-    } else if (
-      (await stat(subFilePath)).isFile() &&
-      subFilePath.endsWith(".xml")
-    ) {
-      await writeJSON(subFilePath);
-      await rm(subFilePath);
+  const tasks: (() => Promise<void>)[] = [];
+  const files = await readdir(xmlPath, { withFileTypes: true });
+  const concurrencyLimit = getConcurrencyThreshold();
+  const foldersToRemote = [];
+
+  for (const subFile of files) {
+    const subFilePath = join(xmlPath, subFile.name);
+    if (subFile.isDirectory()) {
+      tasks.push(() => transform2JSON(subFilePath));
+    } else if (subFile.isFile() && subFilePath.endsWith(".xml")) {
+      tasks.push(() => writeJSON(subFilePath));
+      foldersToRemote.push(subFilePath);
     }
   }
+  await withConcurrencyLimit(tasks, concurrencyLimit);
+  const deleteTasks = foldersToRemote.map((filePath) => () => rm(filePath));
+  await withConcurrencyLimit(deleteTasks, concurrencyLimit);
 }
 
 async function writeJSON(xmlPath: string): Promise<void> {

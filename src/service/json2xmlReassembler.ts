@@ -7,6 +7,8 @@ import { logger } from "@src/index";
 import { reassembleHandler } from "@src/service/reassembleHandler";
 import { transform2XML } from "@src/service/transform2XML";
 import { deleteReassembledXML } from "@src/service/deleteReassembledXML";
+import { withConcurrencyLimit } from "./withConcurrencyLimit";
+import { getConcurrencyThreshold } from "./getConcurrencyThreshold";
 
 export class JsonToXmlReassembler {
   async reassemble(xmlAttributes: {
@@ -34,15 +36,19 @@ export class JsonToXmlReassembler {
   }
 
   async processFile(filePath: string): Promise<void> {
-    const files = await readdir(filePath);
+    const tasks: (() => Promise<void>)[] = [];
+    const files = await readdir(filePath, { withFileTypes: true });
+    const concurrencyLimit = getConcurrencyThreshold();
+
     for (const file of files) {
-      const subFilePath = join(filePath, file);
-      const subFileStat = await stat(subFilePath);
-      if (subFileStat.isFile() && subFilePath.endsWith(".json")) {
-        await transform2XML(subFilePath);
-      } else if (subFileStat.isDirectory()) {
-        await this.processFile(subFilePath);
+      const subFilePath = join(filePath, file.name);
+
+      if (file.isFile() && subFilePath.endsWith(".json")) {
+        tasks.push(() => transform2XML(subFilePath));
+      } else if (file.isDirectory()) {
+        tasks.push(() => this.processFile(subFilePath));
       }
     }
+    await withConcurrencyLimit(tasks, concurrencyLimit);
   }
 }
