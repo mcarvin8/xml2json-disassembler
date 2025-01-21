@@ -2,11 +2,13 @@
 
 import { readdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path/posix";
-import { parseXML } from "xml-disassembler";
+import {
+  parseXML,
+  getConcurrencyThreshold,
+  withConcurrencyLimit,
+} from "xml-disassembler";
 
 import { logger } from "@src/index";
-import { withConcurrencyLimit } from "./withConcurrencyLimit";
-import { getConcurrencyThreshold } from "./getConcurrencyThreshold";
 
 export async function transform2JSON(xmlPath: string): Promise<void> {
   const tasks: (() => Promise<void>)[] = [];

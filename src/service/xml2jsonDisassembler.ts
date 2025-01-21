@@ -3,12 +3,14 @@
 import { existsSync } from "node:fs";
 import { stat, readdir } from "node:fs/promises";
 import { resolve, join, basename, dirname, extname } from "node:path/posix";
+import {
+  getConcurrencyThreshold,
+  withConcurrencyLimit,
+} from "xml-disassembler";
 
 import { logger } from "@src/index";
 import { disassembleHandler } from "@src/service/disassembleHandler";
 import { transform2JSON } from "@src/service/transform2JSON";
-import { withConcurrencyLimit } from "./withConcurrencyLimit";
-import { getConcurrencyThreshold } from "./getConcurrencyThreshold";
 
 export class XmlToJsonDisassembler {
   async disassemble(xmlAttributes: {
