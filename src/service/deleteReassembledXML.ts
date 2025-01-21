@@ -1,27 +1,19 @@
 "use strict";
 
-import { readdir, rm } from "node:fs/promises";
+import { stat, readdir, rm } from "node:fs/promises";
 import { join } from "node:path/posix";
-import {
-  getConcurrencyThreshold,
-  withConcurrencyLimit,
-} from "xml-disassembler";
 
 export async function deleteReassembledXML(
   disassembledPath: string,
 ): Promise<void> {
-  const tasks: (() => Promise<void>)[] = [];
-  const files = await readdir(disassembledPath, { withFileTypes: true });
-  const concurrencyLimit = getConcurrencyThreshold();
-
+  const files = await readdir(disassembledPath);
   for (const file of files) {
-    const subFilePath = join(disassembledPath, file.name);
-
-    if (file.isFile() && subFilePath.endsWith(".xml")) {
-      tasks.push(() => rm(subFilePath));
-    } else if (file.isDirectory()) {
-      tasks.push(() => deleteReassembledXML(subFilePath));
+    const filePath = join(disassembledPath, file);
+    const fileStat = await stat(filePath);
+    if (fileStat.isFile() && filePath.endsWith(".xml")) {
+      await rm(filePath);
+    } else if (fileStat.isDirectory()) {
+      await deleteReassembledXML(filePath);
     }
   }
-  await withConcurrencyLimit(tasks, concurrencyLimit);
 }

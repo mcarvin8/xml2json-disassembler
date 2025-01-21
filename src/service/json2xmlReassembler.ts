@@ -2,10 +2,6 @@
 
 import { stat, readdir } from "node:fs/promises";
 import { join } from "node:path/posix";
-import {
-  getConcurrencyThreshold,
-  withConcurrencyLimit,
-} from "xml-disassembler";
 
 import { logger } from "@src/index";
 import { reassembleHandler } from "@src/service/reassembleHandler";
@@ -38,19 +34,15 @@ export class JsonToXmlReassembler {
   }
 
   async processFile(filePath: string): Promise<void> {
-    const tasks: (() => Promise<void>)[] = [];
-    const files = await readdir(filePath, { withFileTypes: true });
-    const concurrencyLimit = getConcurrencyThreshold();
-
+    const files = await readdir(filePath);
     for (const file of files) {
-      const subFilePath = join(filePath, file.name);
-
-      if (file.isFile() && subFilePath.endsWith(".json")) {
-        tasks.push(() => transform2XML(subFilePath));
-      } else if (file.isDirectory()) {
-        tasks.push(() => this.processFile(subFilePath));
+      const subFilePath = join(filePath, file);
+      const subFileStat = await stat(subFilePath);
+      if (subFileStat.isFile() && subFilePath.endsWith(".json")) {
+        await transform2XML(subFilePath);
+      } else if (subFileStat.isDirectory()) {
+        await this.processFile(subFilePath);
       }
     }
-    await withConcurrencyLimit(tasks, concurrencyLimit);
   }
 }
