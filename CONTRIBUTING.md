@@ -29,4 +29,4 @@ pnpm test
 
 ## Core Package
 
-This package is an extension of the core [xml-disassembler](https://github.com/mcarvin8/xml2-disassembler). For core XML disassembly/reassembly issues, please fork and raise PRs in that repo. Ensure this package is updated to use the latest xml-disassembler.
+This package is an extension of the core [xml-disassembler](https://github.com/mcarvin8/xml-disassembler). For core XML disassembly/reassembly issues, please fork and raise PRs in that repo. Ensure this package is updated to use the latest xml-disassembler.
