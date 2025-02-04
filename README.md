@@ -15,6 +15,7 @@ A JavaScript package to disassemble then transform XML files into smaller JSON f
   - [JSON2XML](#json2xml)
 - [Ignore File](#ignore-file)
 - [Logging](#logging)
+- [Contributing](#contributing)
 - [Template](#template)
 </details>
 
@@ -213,6 +214,10 @@ await reassembleHandler.reassemble({
   postPurge: true,
 });
 ```
+
+## Contributing
+
+Contributions are welcome! See [Contributing](https://github.com/mcarvin8/xml2json-disassembler/blob/main/CONTRIBUTING.md).
 
 ## Template
 
