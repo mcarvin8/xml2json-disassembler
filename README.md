@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/xml2json-disassembler.svg?label=xml2json-disassembler)](https://www.npmjs.com/package/xml2json-disassembler) [![Downloads/week](https://img.shields.io/npm/dw/xml2json-disassembler.svg)](https://npmjs.org/package/xml2json-disassembler)
 
-A JavaScript package to disassemble then transform XML files into smaller JSON files. This is an extension of my [XML Disassembler](https://github.com/mcarvin8/xml-disassembler) package.
+Disassemble XML files into smaller, more manageable JSON files and reassemble the XML when needed. This is an extension of the [XML Disassembler](https://github.com/mcarvin8/xml-disassembler) package.
 
 <!-- TABLE OF CONTENTS -->
 <details>

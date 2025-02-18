@@ -1,7 +1,7 @@
 {
   "name": "xml2json-disassembler",
   "version": "1.1.11",
-  "description": "A JavaScript package to disassemble then transform XML files into smaller JSON files.",
+  "description": "Disassemble XML files into smaller, more manageable JSON files and reassemble the XML when needed.",
   "author": "Matt Carvin",
   "license": "ISC",
   "main": "dist/index.cjs",
