@@ -5,6 +5,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.12](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.11...v1.1.12) (2025-02-24)
+
+
+### Bug Fixes
+
+* **deps:** bump xml-disassembler from 1.3.11 to 1.3.12 ([aa8cf5f](https://github.com/mcarvin8/xml2json-disassembler/commit/aa8cf5f4b092632b657f4f26aff1fdb5fdeed7bd))
+
 ## [1.1.11](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.10...v1.1.11) (2025-01-21)
 
 
