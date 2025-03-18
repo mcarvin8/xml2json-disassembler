@@ -172,6 +172,6 @@ Contributions are welcome! See [Contributing](https://github.com/mcarvin8/xml2js
 
 ## Template
 
-This project was created from a template provided by [Allan Oricil](https://github.com/AllanOricil).
+This project was created from a template by [Allan Oricil](https://github.com/AllanOricil).
 
 His original [license](https://github.com/AllanOricil/js-template/blob/main/LICENSE) remains in this project.
