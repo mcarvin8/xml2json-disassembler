@@ -38,7 +38,7 @@ npm install xml2json-disassembler
 
 ### XML2JSON
 
-Disassemble then transform 1 or multiple XML files in the root of a directory into JSON files. Paths provided must be **relative** paths.
+Disassemble then transform 1 or multiple XML files into JSON files.
 
 ```typescript
 /* 
@@ -67,9 +67,7 @@ await handler.disassemble({
 
 ### JSON2XML
 
-Reassemble all of the JSON files in a directory into 1 XML file. Path provided must be **relative** path. 
-
-> **Note:** You should only be reassembling JSON files created by the `XmlToJsonDisassembler` class for intended results. The reassembled XML file will be created in the parent directory of `filePath` and will overwrite the original file used to create the original disassembled directories, if it still exists and the `fileExtension` flag matches the original file extension.
+Reassemble all of the JSON files in a directory into 1 XML file. 
 
 ```typescript
 /* 
