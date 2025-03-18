@@ -58,9 +58,10 @@
     "xml",
     "json",
     "transform",
-    "transformers",
+    "transformer",
     "disassemble",
     "disassembly",
-    "xml2json"
+    "xml2json",
+    "json2xml"
   ]
 }
