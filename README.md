@@ -22,9 +22,7 @@ Disassemble XML files into smaller, more manageable JSON files and reassemble th
 
 ## Background
 
-Large XML files can be a pain to mantain in version control. These files can contain thousands of lines and it becomes very difficult to track changes made to these files in a standard version control server like GitHub.
-
-This package offers a way to break down large XML files into smaller JSON files which can be used to review changes in a format easier to digest. When needed, the inverse class will reassemble the original XML file from the smaller JSON files.
+Disassembles large XML files into structured JSON files, making it easier to work with large XML data in JavaScript-based applications and data pipelines. Reassembles JSON files back into XML when needed.
 
 ## Install
 
