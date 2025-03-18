@@ -148,7 +148,6 @@ await handler.reassemble({
 
 <img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/disassembled-hashes.png">
 <p><em>Disassembled JSON files using SHA-256 hashes</em></p>
-<br>
 
 ## Ignore File
 
