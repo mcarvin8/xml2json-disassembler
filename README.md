@@ -71,10 +71,10 @@ Reassemble all of the JSON files in a directory into 1 XML file.
 ```typescript
 /* 
 FLAGS
-- filePath: Relative path to the directory containing the JSON files to reassemble into 1 XML file (must be a directory).
-- fileExtension: (Optional) Desired file extension for the final XML (default: `.xml`).
-- postPurge: (Optional) Boolean value. If set to true, purge the disassembled directory containing JSON files after the XML is reassembled.
-                               Defaults to false.
+- filePath:        Relative path to the disassembled JSON directory to reassemble as an XML file.
+- fileExtension:   File extension for the reassembled XML.
+                   (default: `.xml`)
+- postPurge:       Delete the disassembled directory after reassembly.
 */
 import { JsonToXmlReassembler } from "xml2json-disassembler";
 
