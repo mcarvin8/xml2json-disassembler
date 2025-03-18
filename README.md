@@ -157,7 +157,7 @@ Reference [ignore file](https://github.com/mcarvin8/xml-disassembler#ignore-file
 
 Reference [logging](https://github.com/mcarvin8/xml-disassembler#logging) section from `xml-disassembler`.
 
-The `setLogLevel` function can be used as such:
+Import the `setLogLevel` function from `xml2json-disassembler` to change the logging state.
 
 ```typescript
 import {
@@ -167,22 +167,6 @@ import {
 } from "xml2json-disassembler";
 
 setLogLevel("debug");
-
-const disassembleHandler = new XmlToJsonDisassembler();
-await disassembleHandler.disassemble({
-  filePath: "test/baselines/general",
-  uniqueIdElements:
-    "application,apexClass,name,externalDataSource,flow,object,apexPage,recordType,tab,field",
-  prePurge: true,
-  postPurge: true,
-});
-
-const reassembleHandler = new JsonToXmlReassembler();
-await reassembleHandler.reassemble({
-  filePath: "test/baselines/HR_Admin",
-  fileExtension: "permissionset-meta.xml",
-  postPurge: true,
-});
 ```
 
 ## Contributing
