@@ -1,4 +1,4 @@
-# XML2JSON Disassembler
+# `xml2json-disassembler`
 
 [![NPM](https://img.shields.io/npm/v/xml2json-disassembler.svg?label=xml2json-disassembler)](https://www.npmjs.com/package/xml2json-disassembler) [![Downloads/week](https://img.shields.io/npm/dw/xml2json-disassembler.svg)](https://npmjs.org/package/xml2json-disassembler)
 
@@ -24,12 +24,6 @@ Disassemble XML files into smaller, more manageable JSON files and reassemble th
 Large XML files can be a pain to mantain in version control. These files can contain thousands of lines and it becomes very difficult to track changes made to these files in a standard version control server like GitHub.
 
 This package offers a way to break down large XML files into smaller JSON files which can be used to review changes in a format easier to digest. When needed, the inverse class will reassemble the original XML file from the smaller JSON files.
-
-This will parse and retain the following XML elements:
-
-- CDATA sections (`"![CDATA["`)
-- Comments (`"!---"`)
-- Attributes (`"@__**"`)
 
 ## Install
 
@@ -70,9 +64,9 @@ await handler.disassemble({
 
 Disassemble then transform 1 or multiple XML files into JSON files. Paths provided must be **relative** paths. If the `filePath` is a directory, only the XMLs in the immediate directory will be processed. Each XML wiill be transformed into JSON files in new sub-directories using the XML's base name (everything before the first period in the file-name).
 
-Example:
+### Example
 
-An XML file (`HR_Admin.permissionset-meta.xml`) with the following nested and leaf elements
+**XML file (`HR_Admin.permissionset-meta.xml`)**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -121,10 +115,7 @@ An XML file (`HR_Admin.permissionset-meta.xml`) with the following nested and le
 </PermissionSet>
 ```
 
-will be disassembled into a sub-directory named `HR_Admin` as such:
-
-- Each nested element (`<recordTypeVisibilities>`, `<applicationVisibilities>`, `pageAccesses`, etc.) will be disassembled into further sub-directories by the nested element name. If a unique & required ID element (`application` is the unique ID element for `<applicationVisibilities>`) is found, the disassembled file will be named using it. Otherwise, the disassembled files for nested elements will be named using the SHA-256 of the element contents.
-- Each leaf element (`<description>`, `<label>`, `<userLicense>`) will be disassembled into the same file in the first sub-directory, which will have the same file-name as the original file.
+**Disassembled JSON Files**
 
 <img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/disassembled.png">
 
@@ -158,36 +149,13 @@ Reassemble all of the JSON files in a directory into 1 XML file. Path provided m
 
 ## Ignore File
 
-If you wish, you can create an ignore file to have the disassembler ignore specific XMLs similar to a `.gitignore` file.
-
-The disassembler uses the [node-ignore](https://github.com/kaelzhang/node-ignore) package to parse ignore files that follow [.gitignore spec 2.22.1](https://git-scm.com/docs/gitignore).
-
-By default, the XML disassembler will look for an ignore file named `.xmldisassemblerignore` in the current working directory. Set the `ignorePath` flag to override this ignore path when running the XmlToJsonDisassembler class.
+Reference [ignore file](https://github.com/mcarvin8/xml-disassembler#ignore-file) section from `xml-disassembler`.
 
 ## Logging
 
-By default, the package will not print any debugging statements to the console. Any error or debugging statements will be added to a log file, `disassemble.log`, created in the same directory you are running this package in. This file will be created when running the package in all cases, even if there are no errors. I recommend adding `disassemble.log` to your `.gitignore` file.
+Reference [logging](https://github.com/mcarvin8/xml-disassembler#logging) section from `xml-disassembler`.
 
-This log will include the results of this package and the XML Disassembler package.
-
-The logger's default state is to only log errors to `disassemble.log`. Check this file for ERROR statements that will look like:
-
-```
-[2024-03-30T14:28:37.950] [ERROR] default - The XML file HR_Admin.no-nested-elements.xml only has leaf elements. This file will not be disassembled.
-[2024-04-16T14:55:27.170] [ERROR] default - The file path C:\Users\matthew.carvin\Documents\xml2json-disassembler\test\baselines\not-an-xml.txt is not an XML file.
-```
-
-To add additional debugging statements to the log file, import the `setLogLevel` function from the package and run the function with `debug` to print all debugging statements to a log file.
-
-When the log level is set to `debug`, the log file will contain statements like this to indicate which files were processed for disassembly and reassembly:
-
-```
-[2024-04-16T14:56:29.665] [DEBUG] default - Parsing file to disassemble: C:\Users\matthew.carvin\Documents\xml2json-disassembler\test\baselines\general\attributes.xml
-[2024-04-16T14:56:29.675] [DEBUG] default - Created disassembled file: C:\Users\matthew.carvin\Documents\xml2json-disassembler\test\baselines\general\attributes\nest\103c6c8b.nest-meta.xml
-[2024-04-16T14:56:29.676] [DEBUG] default - Created disassembled file: C:\Users\matthew.carvin\Documents\xml2json-disassembler\test\baselines\general\attributes\nest\f876f2be.nest-meta.xml
-[2024-04-16T14:56:29.682] [DEBUG] default - test\baselines\general\attributes\nest\103c6c8b.nest-meta.xml has been transformed into test\baselines\general\attributes\nest\103c6c8b.nest-meta.json
-[2024-04-16T14:56:29.687] [DEBUG] default - test\baselines\general\attributes\nest\f876f2be.nest-meta.xml has been transformed into test\baselines\general\attributes\nest\f876f2be.nest-meta.json
-```
+The `setLogLevel` function can be used as such:
 
 ```typescript
 import {
