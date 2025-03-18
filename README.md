@@ -13,6 +13,7 @@ Disassemble XML files into smaller, more manageable JSON files and reassemble th
 - [Usage](#usage)
   - [XML2JSON](#xml2json)
   - [JSON2XML](#json2xml)
+- [Example](#example)
 - [Ignore File](#ignore-file)
 - [Logging](#logging)
 - [Contributing](#contributing)
@@ -36,6 +37,8 @@ npm install xml2json-disassembler
 ## Usage
 
 ### XML2JSON
+
+Disassemble then transform 1 or multiple XML files in the root of a directory into JSON files. Paths provided must be **relative** paths.
 
 ```typescript
 /* 
@@ -62,9 +65,31 @@ await handler.disassemble({
 });
 ```
 
-Disassemble then transform 1 or multiple XML files in the root of a directory into JSON files. Paths provided must be **relative** paths.
+### JSON2XML
 
-### Example
+Reassemble all of the JSON files in a directory into 1 XML file. Path provided must be **relative** path. 
+
+> **Note:** You should only be reassembling JSON files created by the `XmlToJsonDisassembler` class for intended results. The reassembled XML file will be created in the parent directory of `filePath` and will overwrite the original file used to create the original disassembled directories, if it still exists and the `fileExtension` flag matches the original file extension.
+
+```typescript
+/* 
+FLAGS
+- filePath: Relative path to the directory containing the JSON files to reassemble into 1 XML file (must be a directory).
+- fileExtension: (Optional) Desired file extension for the final XML (default: `.xml`).
+- postPurge: (Optional) Boolean value. If set to true, purge the disassembled directory containing JSON files after the XML is reassembled.
+                               Defaults to false.
+*/
+import { JsonToXmlReassembler } from "xml2json-disassembler";
+
+const handler = new JsonToXmlReassembler();
+await handler.reassemble({
+  filePath: "test/baselines/HR_Admin",
+  fileExtension: "permissionset-meta.xml",
+  postPurge: true,
+});
+```
+
+## Example
 
 **XML file (`HR_Admin.permissionset-meta.xml`)**
 
@@ -124,30 +149,6 @@ Disassemble then transform 1 or multiple XML files in the root of a directory in
 <img src="https://raw.githubusercontent.com/mcarvin8/xml2json-disassembler/main/.github/images/disassembled-hashes.png">
 
 <br>
-
-### JSON2XML
-
-```typescript
-/* 
-FLAGS
-- filePath: Relative path to the directory containing the JSON files to reassemble into 1 XML file (must be a directory).
-- fileExtension: (Optional) Desired file extension for the final XML (default: `.xml`).
-- postPurge: (Optional) Boolean value. If set to true, purge the disassembled directory containing JSON files after the XML is reassembled.
-                               Defaults to false.
-*/
-import { JsonToXmlReassembler } from "xml2json-disassembler";
-
-const handler = new JsonToXmlReassembler();
-await handler.reassemble({
-  filePath: "test/baselines/HR_Admin",
-  fileExtension: "permissionset-meta.xml",
-  postPurge: true,
-});
-```
-
-Reassemble all of the JSON files in a directory into 1 XML file. Path provided must be **relative** path. 
-
-> **Note:** You should only be reassembling JSON files created by the `XmlToJsonDisassembler` class for intended results. The reassembled XML file will be created in the parent directory of `filePath` and will overwrite the original file used to create the original disassembled directories, if it still exists and the `fileExtension` flag matches the original file extension.
 
 ## Ignore File
 
