@@ -10,7 +10,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* upgrade xml-disassembler ([0a98497](https://github.com/mcarvin8/xml2json-disassembler/commit/0a9849753228c305587e7859b9f2cdc7c3298bd0))
 * upgrade xml-disassembler ([bd34a85](https://github.com/mcarvin8/xml2json-disassembler/commit/bd34a8571f0d2dea7e6908c0ecf750223ac9a81f))
 
 ## [1.1.14](https://github.com/mcarvin8/xml2json-disassembler/compare/v1.1.13...v1.1.14) (2025-03-18)
