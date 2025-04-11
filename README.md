@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/xml2json-disassembler.svg?label=xml2json-disassembler)](https://www.npmjs.com/package/xml2json-disassembler) [![Downloads/week](https://img.shields.io/npm/dw/xml2json-disassembler.svg)](https://npmjs.org/package/xml2json-disassembler)
 
-> DEPRECATION WARNING: This package is deprecated in favor of the latest [`xml-disassembler`](https://github.com/mcarvin8/xml-disassembler) package, which can now handle diassembling XML files into smaller JSON files, as well as other file formats like YAML and JSON5. Please migrate to the latest [`xml-disassembler`](https://github.com/mcarvin8/xml-disassembler).
+> DEPRECATION WARNING: This package is deprecated in favor of the latest [`xml-disassembler`](https://github.com/mcarvin8/xml-disassembler) package, which can now handle disassembling XML files into smaller JSON files, as well as other file formats like YAML and JSON5. Please migrate to the latest [`xml-disassembler`](https://github.com/mcarvin8/xml-disassembler).
 
 <!-- TABLE OF CONTENTS -->
 <details>
